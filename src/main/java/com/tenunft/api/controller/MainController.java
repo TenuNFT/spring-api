@@ -1,9 +1,8 @@
-package com.tenunft.api.rest;
+package com.tenunft.api.controller;
 
 import com.tenunft.api.response.GlobalResponse;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @CrossOrigin
 @RestController
-public class baseController {
+public class MainController {
 
     @GetMapping("/ping")
     public GlobalResponse<String> generateAllEmail() {

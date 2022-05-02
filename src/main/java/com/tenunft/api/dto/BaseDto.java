@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tenunft.api.helper.JsonUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,12 +16,11 @@ import java.util.Map;
 public class BaseDto {
     @Override
     public String toString() {
-        String value;
+        String value = null;
         try {
             value = JsonUtil.toString(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            value = "";
         }
         return  value;
     }
