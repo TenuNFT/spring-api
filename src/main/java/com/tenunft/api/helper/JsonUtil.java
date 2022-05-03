@@ -3,6 +3,8 @@ package com.tenunft.api.helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 
 import java.text.SimpleDateFormat;
 
@@ -12,17 +14,19 @@ import java.text.SimpleDateFormat;
  **/
 public class JsonUtil {
 
-//    private static ModelMapper modelMapper = null;
+    private static ModelMapper modelMapper = null;
     private static SimpleDateFormat sdf = null;
     private static ObjectMapper objectMapper = null;
 
-//    public static ModelMapper GetDefaultModelMapper() {
-//        if (modelMapper == null) {
-//            modelMapper = new ModelMapper();
-//            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//        }
-//        return modelMapper;
-//    }
+    public static ModelMapper GetDefaultModelMapper() {
+        if (modelMapper == null) {
+            modelMapper = new ModelMapper();
+            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        }
+        return modelMapper;
+    }
+
+
     public static SimpleDateFormat getSimpleDateFormat() {
         if (sdf == null) {
             sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.tenunft.api.constant.OnChainFactory;
 import com.tenunft.api.model.entity.NonFungibleTokenModel;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,7 @@ class NonFungibleTokenRepoTest {
     NonFungibleTokenRepo repo;
 
     @Test
+    @Disabled
     void InitDatabase() {
         Faker faker = new Faker();
 
@@ -32,6 +34,8 @@ class NonFungibleTokenRepoTest {
             nonFungibleToken.setLatestPrice(BigDecimal.valueOf(faker.number().randomDouble(2, 0, 10)));
             nonFungibleToken.setDescription(faker.lorem().paragraph());
             nonFungibleToken.setCreator(faker.funnyName().name());
+            nonFungibleToken.setCreatorWallet("0x".concat(faker.crypto().sha1()));
+            nonFungibleToken.setOwnerWallet("0x".concat(faker.crypto().sha1()));
             NonFungibleTokenModel save = repo.save(nonFungibleToken);
             log.info("save = {}", save);
 //            log.info("nonFungibleToken = {}", nonFungibleToken);

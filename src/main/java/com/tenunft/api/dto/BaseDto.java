@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tenunft.api.helper.JsonUtil;
+import org.modelmapper.ModelMapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author : Kneotrino
  * @since : 08/11/2021
  **/
-public class BaseDto {
+public class BaseDto<E> {
     @Override
     public String toString() {
         String value = null;
@@ -22,7 +23,7 @@ public class BaseDto {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return  value;
+        return value;
     }
 
     @JsonIgnore
@@ -41,6 +42,12 @@ public class BaseDto {
     @JsonIgnore
     public void setLogs(Map<String, Object> logs) {
         setAdditionalProperty("logs", logs);
+    }
+
+
+    public <T> T constructModel(Class<T> classType) {
+        ModelMapper modelMapper = JsonUtil.GetDefaultModelMapper();
+        return modelMapper.map(this, classType);
     }
 
 

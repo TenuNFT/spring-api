@@ -1,8 +1,8 @@
 package com.tenunft.api.service;
 
-import com.tenunft.api.dto.NftDto;
-import com.tenunft.api.model.entity.NonFungibleTokenModel;
-import com.tenunft.api.repository.NonFungibleTokenRepo;
+import com.tenunft.api.dto.FileItemDto;
+import com.tenunft.api.model.entity.FileItemModel;
+import com.tenunft.api.repository.FileItemRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,37 +21,37 @@ import java.util.stream.Collectors;
  **/
 @Slf4j
 @Service
-public class NonFungibleTokenService implements BaseService<NftDto, NonFungibleTokenModel> {
+public class FileItemService implements BaseService<FileItemDto, FileItemModel> {
 
     @Autowired
-    NonFungibleTokenRepo repo;
+    FileItemRepo repo;
 
     @Override
-    public List<NftDto> fetchAll() {
-        List<NftDto> collect = repo
+    public List<FileItemDto> fetchAll() {
+        List<FileItemDto> collect = repo
                 .findAll()
                 .stream()
-                .map(model -> model.constructDto(NftDto.class))
+                .map(model -> model.constructDto(FileItemDto.class))
                 .collect(Collectors.toList());
         log.info("collect.size() = {}", collect.size());
         return collect;
     }
 
     @Override
-    public Page<NftDto> fetchPageable(Pageable pageable) {
-        Page<NftDto> collect = repo
+    public Page<FileItemDto> fetchPageable(Pageable pageable) {
+        Page<FileItemDto> collect = repo
                 .findByEnabledTrue(pageable)
-                .map(model -> model.constructDto(NftDto.class));
+                .map(model -> model.constructDto(FileItemDto.class));
         log.info("pageable = {}", pageable);
         return collect;
     }
 
     @Override
-    public NftDto fetchById(Long id) {
-        Optional<NonFungibleTokenModel> model = repo.findById(id);
+    public FileItemDto fetchById(Long id) {
+        Optional<FileItemModel> model = repo.findById(id);
         if (model.isPresent()) {
             log.info("Success fetch by id = {}", id);
-            return model.get().constructDto(NftDto.class);
+            return model.get().constructDto(FileItemDto.class);
         } else {
             log.error("Failed fetch by id = {}", id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data not found");
@@ -59,17 +59,16 @@ public class NonFungibleTokenService implements BaseService<NftDto, NonFungibleT
     }
 
     @Override
-    public NonFungibleTokenModel insertOne(NftDto nftDto) {
-        NonFungibleTokenModel inserted =
-                repo.save(nftDto.constructModel(NonFungibleTokenModel.class));
+    public FileItemModel insertOne(FileItemDto FileItemDto) {
+        FileItemModel inserted =
+                repo.save(FileItemDto.constructModel(FileItemModel.class));
         log.info("Success inserted = {}", inserted);
         return inserted;
     }
 
     @Override
-    public NonFungibleTokenModel updateOne(NftDto nftDto, Long id) {
-        Optional<NonFungibleTokenModel> fromDb = repo.findById(id);
-
+    public FileItemModel updateOne(FileItemDto FileItemDto, Long id) {
+        Optional<FileItemModel> fromDb = repo.findById(id);
         if (fromDb.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Failed update, ID not found: " + id);
         } else {

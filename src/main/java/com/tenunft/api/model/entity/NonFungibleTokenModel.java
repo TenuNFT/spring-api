@@ -34,6 +34,11 @@ public class NonFungibleTokenModel extends BaseModel {
     @Column(length = 256, nullable = false)
     private String creator;
 
+    @Column(length = 256, nullable = false)
+    private String ownerWallet;
+
+    @Column(length = 256)
+    private String creatorWallet;
 //    private List<String> tags;
 
 }

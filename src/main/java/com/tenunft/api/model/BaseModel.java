@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -112,5 +113,11 @@ public class BaseModel implements Serializable {
             log.info("Console Debug is Disable");
         }
     }
+
+    public <T> T constructDto(Class<T> classType) {
+        ModelMapper modelMapper = JsonUtil.GetDefaultModelMapper();
+        return modelMapper.map(this, classType);
+    }
+
 
 }

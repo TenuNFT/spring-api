@@ -1,6 +1,6 @@
 package com.tenunft.api.repository;
 
-import com.tenunft.api.model.entity.NonFungibleTokenModel;
+import com.tenunft.api.model.entity.FileItemModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,10 +13,10 @@ import java.util.List;
  * @since : 02/05/2022
  **/
 @Repository
-public interface NonFungibleTokenRepo extends JpaRepository<NonFungibleTokenModel, Long> {
-    Page<NonFungibleTokenModel> findByEnabledTrue(Pageable pageable);
+public interface FileItemRepo extends JpaRepository<FileItemModel, Long> {
+    Page<FileItemModel> findByEnabledTrue(Pageable pageable);
 
-    List<NonFungibleTokenModel> findAllByEnabledTrue();
+    List<FileItemModel> findAllByEnabledTrue();
 
     Long countByEnabledTrue();
 }
