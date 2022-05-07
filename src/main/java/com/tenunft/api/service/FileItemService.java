@@ -57,6 +57,16 @@ public class FileItemService implements BaseService<FileItemDto, FileItemModel> 
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data not found");
         }
     }
+    public FileItemDto fetchByUuid(String uuid) {
+        Optional<FileItemModel> model = repo.findByUuid(uuid);
+        if (model.isPresent()) {
+            log.info("Success fetch by uuid = {}", uuid);
+            return model.get().constructDto(FileItemDto.class);
+        } else {
+            log.error("Failed fetch by uuid = {}", uuid);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data not found");
+        }
+    }
 
     @Override
     public FileItemModel insertOne(FileItemDto FileItemDto) {
@@ -68,6 +78,16 @@ public class FileItemService implements BaseService<FileItemDto, FileItemModel> 
 
     @Override
     public FileItemModel updateOne(FileItemDto FileItemDto, Long id) {
+        Optional<FileItemModel> fromDb = repo.findById(id);
+        if (fromDb.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Failed update, ID not found: " + id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not implemented, ID not found: " + id);
+        }
+    }
+
+    @Override
+    public FileItemModel deleteOne(FileItemDto dto, Long id) {
         Optional<FileItemModel> fromDb = repo.findById(id);
         if (fromDb.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Failed update, ID not found: " + id);

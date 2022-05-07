@@ -15,14 +15,14 @@ public class OnChainFactory {
         OnChainDetails onChainDetails = new OnChainDetails();
         onChainDetails.setContract("0x".concat(faker.crypto().sha1()));
         onChainDetails.setTokenId(faker.number().digit());
-        onChainDetails.setTokenStandard(EIPEnum.ERC1155.toString());
+        onChainDetails.setTokenStandard(EtherEnum.ERC1155.toString());
         onChainDetails.setBlockChain(PlatformEnum.BSC.toString());
         return onChainDetails;
     }
 
-    public static OnChainDetails createBSChain(EIPEnum eipEnum) {
+    public static OnChainDetails createBSChain(EtherEnum etherEnum) {
         OnChainDetails onChainDetails = OnChainFactory.createBSChain();
-        onChainDetails.setTokenStandard(eipEnum.toString());
+        onChainDetails.setTokenStandard(etherEnum.toString());
         return onChainDetails;
     }
 }

@@ -22,6 +22,8 @@ public interface BaseService<DTO extends BaseDto, ENTITY extends BaseModel> {
 
     ENTITY updateOne(DTO dto, Long id);
 
+    ENTITY deleteOne(DTO dto, Long id);
+
     Long countByEnabledTrue();
 
 }

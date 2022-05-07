@@ -4,8 +4,11 @@ import com.tenunft.api.model.OnChainDetails;
 import com.tenunft.api.model.entity.NonFungibleTokenModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : Kneotrino
@@ -21,9 +24,21 @@ public class NftDto extends BaseDto<NonFungibleTokenModel> {
     private String ownerWallet;
     private String description;
     private String creator;
+    private String data;
     private String uuid;
     private Long id;
+    private List<String> resources;
 
-//    private List<String> tags;
+    public static NftDto constructDto(NonFungibleTokenModel model) {
+        NftDto dto = model.constructDto(NftDto.class);
+        List<String> collect = model.getItems().stream()
+                .map(fileItemModel -> ServletUriComponentsBuilder.fromCurrentServletMapping()
+                        .path("resource/")
+                        .path(fileItemModel.getUuid())
+                        .toUriString()).collect(Collectors.toList());
+
+        dto.setResources(collect);
+        return dto;
+    }
 
 }

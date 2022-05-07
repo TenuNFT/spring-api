@@ -4,7 +4,7 @@ package com.tenunft.api.constant;
  * @author : Kneotrino
  * @since : 02/05/2022
  **/
-public enum EIPEnum {
+public enum EtherEnum {
     ERC20("Token Standard"),
     ERC721("Non-Fungible Token Standard"),
     ERC1155("Multi Token Standard"),
@@ -12,7 +12,7 @@ public enum EIPEnum {
 
     public final String blockchain;
 
-    private EIPEnum(String label) {
+    private EtherEnum(String label) {
         this.blockchain = label;
     }
 

@@ -60,14 +60,22 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.3.0</version>
+			<version>3.1.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
+			<version>20030203.000129</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>20030203.000550</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.codehaus.janino</groupId>
@@ -80,9 +88,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.0</version>
+			<groupId>com.github.ipfs</groupId>
+			<artifactId>java-ipfs-http-client</artifactId>
+			<version>1.3.3</version>
 		</dependency>
 
 	</dependencies>
@@ -104,6 +112,10 @@
 		</plugins>
 	</build>
 	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>

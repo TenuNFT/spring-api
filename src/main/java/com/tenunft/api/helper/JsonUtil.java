@@ -21,7 +21,7 @@ public class JsonUtil {
     public static ModelMapper GetDefaultModelMapper() {
         if (modelMapper == null) {
             modelMapper = new ModelMapper();
-            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         }
         return modelMapper;
     }

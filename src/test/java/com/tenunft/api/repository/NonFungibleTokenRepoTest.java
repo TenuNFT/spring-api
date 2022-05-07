@@ -1,7 +1,7 @@
 package com.tenunft.api.repository;
 
-import com.github.javafaker.Faker;
-import com.tenunft.api.constant.OnChainFactory;
+import com.tenunft.api.helper.DummyService;
+import com.tenunft.api.model.entity.FileItemModel;
 import com.tenunft.api.model.entity.NonFungibleTokenModel;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author : Kneotrino
@@ -22,23 +22,19 @@ class NonFungibleTokenRepoTest {
     @Autowired
     NonFungibleTokenRepo repo;
 
+    @Autowired
+    DummyService dummyService;
+
     @Test
     @Disabled
-    void InitDatabase() {
-        Faker faker = new Faker();
+    void dummyTest() {
 
-        for (int i = 0; i < 100; i++) {
-            NonFungibleTokenModel nonFungibleToken = new NonFungibleTokenModel();
-            nonFungibleToken.setOnChainDetails(OnChainFactory.createBSChain());
-            nonFungibleToken.setBasePrice(BigDecimal.ONE);
-            nonFungibleToken.setLatestPrice(BigDecimal.valueOf(faker.number().randomDouble(2, 0, 10)));
-            nonFungibleToken.setDescription(faker.lorem().paragraph());
-            nonFungibleToken.setCreator(faker.funnyName().name());
-            nonFungibleToken.setCreatorWallet("0x".concat(faker.crypto().sha1()));
-            nonFungibleToken.setOwnerWallet("0x".concat(faker.crypto().sha1()));
-            NonFungibleTokenModel save = repo.save(nonFungibleToken);
-            log.info("save = {}", save);
-//            log.info("nonFungibleToken = {}", nonFungibleToken);
+        for (int i = 0; i < 1; i++) {
+            NonFungibleTokenModel dummyNft = dummyService.dummyNft();
+            List<FileItemModel> list = dummyService.dummyListFile(3, dummyNft);
+            dummyNft.setItems(list);
+            log.info("dummyNft = {}", dummyNft);
+            log.info("repo = {}", repo.save(dummyNft));
         }
     }
 }

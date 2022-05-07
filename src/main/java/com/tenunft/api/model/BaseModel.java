@@ -62,9 +62,6 @@ public class BaseModel implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date DateModified;
 
-    @Transient
-    private StringBuilder debugLogs = new StringBuilder(System.lineSeparator());
-
 
     @PrePersist
     protected void onCreated() {
@@ -88,30 +85,6 @@ public class BaseModel implements Serializable {
             e.printStackTrace();
         }
         return json;
-    }
-
-    void appendLog(String newLine) {
-        this.getDebugLogs()
-                .append("[DEBUG] ")
-                .append(newLine)
-                .append(System.lineSeparator());
-    }
-
-    void appendLog(String newLine, long Amount) {
-        this.getDebugLogs()
-                .append("[DEBUG] ")
-                .append(newLine)
-                .append(" = ")
-                .append(String.format("%,d", Amount))
-                .append(System.lineSeparator());
-    }
-
-    public void printLog(Logger log, boolean debug) {
-        if (debug) {
-            log.info(getDebugLogs().toString());
-        } else {
-            log.info("Console Debug is Disable");
-        }
     }
 
     public <T> T constructDto(Class<T> classType) {
